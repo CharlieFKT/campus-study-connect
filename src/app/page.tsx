@@ -6,6 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import { defaultDemoSchool } from "@/lib/default-profile";
 
 export default function LandingPage() {
+  const demoHighlights = [
+    { icon: Flame, text: "Swipe-style deck with Like / Pass / Super Like" },
+    { icon: Users, text: "Find people for study, hangouts, and events" },
+    { icon: Sparkles, text: "Compatibility hints + shared classes/interests" },
+  ] as const;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50/80 via-white to-violet-50/60">
       <header className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6">
@@ -67,11 +73,7 @@ export default function LandingPage() {
             <CardContent className="space-y-4 p-6 sm:p-8">
               <p className="text-sm font-medium text-foreground">What this demo feels like</p>
               <div className="grid gap-3">
-                {[
-                  [Flame, "Swipe-style deck with Like / Pass / Super Like"],
-                  [Users, "Find people for study, hangouts, and events"],
-                  [Sparkles, "Compatibility hints + shared classes/interests"],
-                ].map(([Icon, text]) => (
+                {demoHighlights.map(({ icon: Icon, text }) => (
                   <div key={text} className="flex items-center gap-3 rounded-xl border bg-muted/30 p-3 text-sm">
                     <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
                       <Icon className="h-4 w-4 text-primary" />

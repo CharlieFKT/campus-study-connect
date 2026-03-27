@@ -72,18 +72,7 @@ export function SwipeClient() {
 
   const current = deck[index];
 
-  React.useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (!current) return;
-      if (e.key === "ArrowLeft") act("pass");
-      if (e.key === "ArrowRight") act("like");
-      if (e.key === "ArrowUp") act("super");
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [current]);
-
-  function act(action: Action) {
+  const act = React.useCallback((action: Action) => {
     if (!current) return;
     setLastAction(action);
     if (action === "like" || action === "super") {
@@ -94,7 +83,18 @@ export function SwipeClient() {
       setLastAction(null);
       setDragX(0);
     }, 170);
-  }
+  }, [current]);
+
+  React.useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (!current) return;
+      if (e.key === "ArrowLeft") act("pass");
+      if (e.key === "ArrowRight") act("like");
+      if (e.key === "ArrowUp") act("super");
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [current, act]);
 
   function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
     if (!current) return;

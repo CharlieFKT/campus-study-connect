@@ -42,7 +42,6 @@ export function MessagesClient() {
     groupMessagesByGroup,
     sendGroupMessage,
     receiveGroupMessage,
-    profile,
   } = useDemo();
   const [activeKey, setActiveKey] = React.useState<string | null>(null);
   const [draft, setDraft] = React.useState("");
